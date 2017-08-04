@@ -36,4 +36,10 @@ public class ConfigHelper {
     public static String getJdbcUsername(){
         return PropsUtil.getString(CONFIG_PROPS,ConfigConstant.JDBC_USERNAME);
     }
+
+    /**
+     * 获取JDBC密码
+     * @return
+     */
+    public static String getJdbcPassword() {return PropsUtil.getString(CONFIG_PROPS,ConfigConstant.JDBC_PASSWORD);}
 }
