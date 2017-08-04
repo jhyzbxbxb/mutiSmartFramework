@@ -4,7 +4,7 @@ package com.asiainfo.framework.util;
  * 转型操作工具类
  * Created by xubin on 2017/8/3.
  */
-public class CastUtil {
+public final class CastUtil {
 
     /**
      * 转为String类型

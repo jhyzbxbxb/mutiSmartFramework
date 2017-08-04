@@ -9,7 +9,7 @@ import java.util.Properties;
  * 属性文件助手类
  * Created by xubin on 2017/8/3.
  */
-public class ConfigHelper {
+public final class ConfigHelper {
 
     private static final Properties CONFIG_PROPS = PropsUtil.loadProps(ConfigConstant.CONFIG_FILE);
 

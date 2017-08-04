@@ -13,7 +13,7 @@ import java.util.Properties;
  * 属性文件加载工具类
  * Created by xubin on 2017/8/3.
  */
-public class PropsUtil {
+public final class PropsUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
 
