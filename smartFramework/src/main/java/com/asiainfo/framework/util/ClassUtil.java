@@ -3,6 +3,8 @@ package com.asiainfo.framework.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -49,6 +51,9 @@ public class ClassUtil {
                 URL url = urls.nextElement();
                 if(url!=null){
                     String proptocol = url.getProtocol();
+                    if("file".equals(proptocol)){
+                        
+                    }
                 }
             }
         }catch (Exception e){
@@ -57,9 +62,51 @@ public class ClassUtil {
         return classSet;
     }
 
-    public static void main(String[] args){
-        System.out.println("111");
-        getClassSet("com.asiainfo.framework");
+    /**
+     * 添加类到容器中
+     * @param classSet
+     * @param packagePath
+     * @param packageName
+     */
+    private static void addClass(Set<Class<?>> classSet,String packagePath,String packageName){
+        File[] files = new File(packagePath).listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return (file.isFile() && file.getName().endsWith("class")) || file.isDirectory();
+            }
+        });
+        for(File file:files){
+            String fileName = file.getName();
+            if(file.isFile()){
+                String className = fileName.substring(0,fileName.lastIndexOf("."));
+                if(StringUtil.isNotEmpty(packageName)){
+                    className = packageName + "." +className;
+                }
+                doAddClass(classSet,className);
+            }else {
+                //递归加载所有的类
+                String subPackagePath = fileName;
+                if(StringUtil.isNotEmpty(packagePath)){
+                    subPackagePath = packagePath + "/" + subPackagePath;
+                }
+                String subPackageName = fileName;
+                if(StringUtil.isNotEmpty(packageName)){
+                    subPackageName = packageName + "." + subPackageName;
+                }
+                addClass(classSet,subPackagePath,subPackageName);
+            }
+        }
+
+    }
+
+    /**
+     * 添加具体类
+     * @param classSet
+     * @param className
+     */
+    private static void doAddClass(Set<Class<?>> classSet, String className) {
+        Class<?> cls = loadClass(className,false);
+        classSet.add(cls);
     }
 
 
