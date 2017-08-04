@@ -42,4 +42,22 @@ public class ConfigHelper {
      * @return
      */
     public static String getJdbcPassword() {return PropsUtil.getString(CONFIG_PROPS,ConfigConstant.JDBC_PASSWORD);}
+
+    /**
+     * 获取应用基础包名
+     * @return
+     */
+    public static String getAppBasePackage(){return PropsUtil.getString(CONFIG_PROPS,ConfigConstant.APP_BASE_PACKAGE);}
+
+    /**
+     * 获取应用jsp路径
+     * @return
+     */
+    public static String getAppJspPath(){return PropsUtil.getString(CONFIG_PROPS,ConfigConstant.APP_JSP_PATH);}
+
+    /**
+     * 获取应用静态资源路径
+     * @return
+     */
+    public static String getAppAssetPath(){return PropsUtil.getString(CONFIG_PROPS,ConfigConstant.APP_ASSET_PATH);}
 }
